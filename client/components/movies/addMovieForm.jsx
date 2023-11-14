@@ -3,10 +3,17 @@ import {MoviesContext} from "./moviesContext";
 export function AddMovieForm() {
     const [title, setTitle] = useState("");
     const {onAddMovie} = useContext(MoviesContext);
-    async function handleSubmit(e){
+
+    // sender en post request til serveren
+    async function handleSubmit(e) {
         e.preventDefault();
-        const movie = {title};
-        await onAddMovie(movie);
+        await fetch("/api/movies", {
+            method: "POST",
+            body: JSON.stringify({ title }),
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
     }
     return <form onSubmit={handleSubmit}>
         <h2>Add movie</h2>

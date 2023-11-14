@@ -6,10 +6,12 @@ export function MoviesList() {
     const [loading, setLoading] = useState(true);
     const {fetchMovies} = useContext(MoviesContext);
     async function loadMovies(){
+        const response = await fetch("/api/movies");
         setLoading(true);
-        setMovies(await fetchMovies());
+        setMovies(await response.json());
         setLoading(false);
     }
+
     useEffect(() => {
         loadMovies();
     }, []);

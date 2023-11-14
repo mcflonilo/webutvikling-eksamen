@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`movies react application show loaded movies 1`] = `
+[
+  <h2>
+    list movies
+  </h2>,
+  <div>
+    The Godfather
+  </div>,
+  <div>
+    The Godfather: Part II
+  </div>,
+]
+`;
+
+exports[`movies react application show loading screen 1`] = `
+[
+  <h2>
+    list movies
+  </h2>,
+  <div>
+    spinner
+  </div>,
+]
+`;

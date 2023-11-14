@@ -14,13 +14,16 @@
     "install:server": "cd server && npm install --include=dev",
     "build": "npm run build:client",
     "build:client": "cd client && npm run build",
-    "start": "cd server && npm start"
+    "start": "cd server && npm start",
+    "check:prettier": "prettier --check .",
+    "prettier": "prettier --write ."
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "concurrently": "^6.2.0"
+    "concurrently": "^6.2.0",
+    "prettier": "^3.1.0"
   },
   "dependencies": {
     "body-parser": "^1.20.2",

@@ -1,0 +1,66 @@
+* {
+  margin: 0;
+}
+
+body {
+  color: aliceblue;
+  background-color: rebeccapurple;
+}
+
+nav a {
+  margin: 10px;
+  color: #149bd3;
+  text-decoration: none;
+}
+
+
+main {
+  background-color: aliceblue;
+  color: rebeccapurple;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    color: aliceblue;
+    background-color: rebeccapurple;
+  }
+
+
+  main {
+    background-color: rebeccapurple;
+    color: aliceblue;
+    border: 1px solid aliceblue;
+  }
+
+  main a {
+    color: aliceblue;
+  }
+}
+
+#root {
+  height: 100vh;
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+}
+
+main {
+  min-width: 80%;
+  max-width: 400px;
+  margin-inline: auto;
+  margin-block: 1em;
+  border-radius: 1em;
+}
+
+header,
+nav,
+footer {
+  padding-inline: 1em;
+}
+
+main {
+  padding: 1em;
+}
+
+.movie {
+  margin-block: 1em;
+}

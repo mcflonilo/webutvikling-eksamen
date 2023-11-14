@@ -8,14 +8,14 @@ I innleveringen skal dere lage et program med React og Express som lar brukeren 
 
 (Kryss av det dere har gjennomført. Erstatt eventuelt ordet "tasks")
 
-* [ ] Applikasjonen har en korrekt `.gitignore`-fil og det finnes ingen passord eller store filer i Git-historikken
-* [ ] Applikasjonen har en React komponent som lister tasks
-* [ ] Applikasjonen har en React komponent som lar brukeren opprette nye tasks
-* [ ] Applikasjonen er deployet på Heroku og README-filen har link til Heroku applikasjonen
-* [ ] Applikasjonen har et API i Express for å opprette og liste tasks (ikke påkrevd)
-* [ ] Applikasjonen er satt opp til å bruke Prettier for å formatere kode (ikke påkrevd)
-* [ ] Applikasjonen har tester for frontend kode i React (valgfritt)
-* [ ] Applikasjonen har tester for backend kode i Express (valgfritt)
-* [ ] Applikasjonen bruker TypeScript for frontend-kode (valgfritt)
-* [ ] Applikasjonen bruker TypeScript for backend-kode (valgfritt)
-* [ ] Applikasjonen lagrer tasks i MongoDB (valgfritt)
+- [ ] Applikasjonen har en korrekt `.gitignore`-fil og det finnes ingen passord eller store filer i Git-historikken
+- [ ] Applikasjonen har en React komponent som lister tasks
+- [ ] Applikasjonen har en React komponent som lar brukeren opprette nye tasks
+- [ ] Applikasjonen er deployet på Heroku og README-filen har link til Heroku applikasjonen
+- [ ] Applikasjonen har et API i Express for å opprette og liste tasks (ikke påkrevd)
+- [ ] Applikasjonen er satt opp til å bruke Prettier for å formatere kode (ikke påkrevd)
+- [ ] Applikasjonen har tester for frontend kode i React (valgfritt)
+- [ ] Applikasjonen har tester for backend kode i Express (valgfritt)
+- [ ] Applikasjonen bruker TypeScript for frontend-kode (valgfritt)
+- [ ] Applikasjonen bruker TypeScript for backend-kode (valgfritt)
+- [ ] Applikasjonen lagrer tasks i MongoDB (valgfritt)

@@ -7,6 +7,7 @@ import { MoviesRoutes } from "./components/movies/moviesRoutes";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 import "./application.css";
 
+
 function Application() {
   const [movies, setMovies] = useState([
     { title: "The Godfather" },
@@ -29,9 +30,13 @@ function Application() {
         <Link to={"/"}> Front Page</Link>
         <Link to={"/movies/new"}> add movie</Link>
         <Link to={"/movies"}> list movies</Link>
+          <Link to={"/login"}> login</Link>
+          <Link to={"/login/callback"}> list movies</Link>
       </nav>
+
       <main>
         <MoviesRoutes />
+
       </main>
       <footer>jeg har cancer</footer>
     </MoviesContext.Provider>

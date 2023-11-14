@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { LoginContext } from "./loginButton";
 
 const OPENID_DISCOVERY_URL =
     "https://accounts.google.com/.well-known/openid-configuration";
 const CLIENT_ID =
-    "34816606807-b6r7038squrk57g5qir3ldh223oce9u6.apps.googleusercontent.com";
+    "893890510835-3aeshgp5bpa6dk1hc85ousdnv283rblp.apps.googleusercontent.com";
 
 async function fetchJson(url) {
     const res = await fetch(url);
@@ -21,8 +22,8 @@ function LoginWithOauthButton() {
         const parameters = {
             response_type: "token",
             client_id: CLIENT_ID,
-            scope: "profile email",
             redirect_uri: window.location.origin + "/login/callback",
+            scope: "profile email",
         };
         setAuthorizationUrl(
             discoveryDoc.authorization_endpoint +

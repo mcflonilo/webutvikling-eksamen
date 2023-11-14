@@ -11,6 +11,7 @@ export function AddMovieForm() {
       headers: {
         "Content-Type": "application/json",
       },
+        async reload(){},
     });
   }
   return (

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Link} from "react-router-dom";
-import { Routes } from "./components/movies/Routes";
+import { AppRoutes } from "./components/movies/AppRoutes";
 import {LoginButton} from "./components/login/loginButton";
 import {LoginContext} from "./components/login/loginContext";
 
@@ -37,7 +37,7 @@ function Application() {
                 <LoginButton/>
             </nav>
             <main>
-                <Routes />
+                <AppRoutes />
 
             </main>
             <footer>jeg har cancer</footer>

@@ -6,7 +6,7 @@ import {LoginPage} from "../login/loginPage";
 import {ProfilePage} from "../login/profilePage";
 import {LoginCallback} from "../login/loginCallback";
 
-export function Routes() {
+export function AppRoutes() {
   return (
     <Routes>
       <Route path={"/"} element={<h2>front page</h2>} />

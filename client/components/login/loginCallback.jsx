@@ -1,6 +1,6 @@
 import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { LoginContext } from "./loginButton";
+import { LoginContext } from "./loginContext";
 
 export function LoginCallback() {
     const { reload } = useContext(LoginContext);

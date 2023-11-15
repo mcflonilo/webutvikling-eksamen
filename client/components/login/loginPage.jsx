@@ -1,11 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { LoginContext } from "./loginButton";
+import { LoginContext } from "./loginContext";
 
-const OPENID_DISCOVERY_URL =
-    "https://accounts.google.com/.well-known/openid-configuration";
-const CLIENT_ID =
-    "893890510835-3aeshgp5bpa6dk1hc85ousdnv283rblp.apps.googleusercontent.com";
+const OPENID_DISCOVERY_URL = "https://accounts.google.com/.well-known/openid-configuration";
+const CLIENT_ID = "893890510835-3aeshgp5bpa6dk1hc85ousdnv283rblp.apps.googleusercontent.com";
 
 async function fetchJson(url) {
     const res = await fetch(url);
@@ -31,7 +29,6 @@ function LoginWithOauthButton() {
             new URLSearchParams(parameters),
         );
     }
-
     useEffect(() => {
         generateAuthorizationUrl();
     }, []);

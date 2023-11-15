@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, {useContext, useState} from "react";
+import {LoginContext} from "../login/loginContext";
 export function AddMovieForm() {
   const [title, setTitle] = useState("");
+  const {user} = useContext(LoginContext);
 
   // sender en post request til serveren
   async function handleSubmit(e) {

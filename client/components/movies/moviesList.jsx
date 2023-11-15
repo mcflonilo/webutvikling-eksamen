@@ -1,10 +1,8 @@
-import React, { useState, useContext, useEffect } from "react";
-import { MoviesContext } from "./moviesContext";
+import React, { useState, useEffect } from "react";
 
 export function MoviesList() {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { fetchMovies } = useContext(MoviesContext);
   async function loadMovies() {
     const response = await fetch("/api/movies");
     setLoading(true);

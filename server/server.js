@@ -6,9 +6,6 @@ import fetch from "node-fetch";
 import { loginRouter } from "./loginRouter.js";
 import { moviesRouter } from "./moviesRouter.js";
 let backendUser = null;
-
-const OPENID_DISCOVERY_URL =
-  "https://accounts.google.com/.well-known/openid-configuration";
 dotenv.config();
 async function fetchJson(url, params) {
   const res = await fetch(url, params);
@@ -21,12 +18,12 @@ async function fetchJson(url, params) {
 const app = express();
 app.use(express.static("../client/dist"));
 app.use(express.json());
-app.use(cookieParser("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"));
+app.use(cookieParser(process.env.COOKIE_PARSER_SECRET));
 app.use(moviesRouter);
 app.use(async (req, res, next) => {
   const { username, access_token } = req.signedCookies;
   if (access_token) {
-    const discoveryDocument = await fetchJson(OPENID_DISCOVERY_URL);
+    const discoveryDocument = await fetchJson(process.env.OPENID_DISCOVERY_URL);
     const { userinfo_endpoint } = discoveryDocument;
     const user = await fetchJson(userinfo_endpoint, {
       headers: {

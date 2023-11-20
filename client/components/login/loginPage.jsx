@@ -1,11 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { LoginContext } from "./loginContext";
-
-const OPENID_DISCOVERY_URL =
-  "https://accounts.google.com/.well-known/openid-configuration";
-const CLIENT_ID =
-  "893890510835-3aeshgp5bpa6dk1hc85ousdnv283rblp.apps.googleusercontent.com";
+import dotenv from "dotenv";
+dotenv.config();
 
 async function fetchJson(url) {
   const res = await fetch(url);
@@ -18,10 +15,10 @@ async function fetchJson(url) {
 function LoginWithOauthButton() {
   const [authorizationUrl, setAuthorizationUrl] = useState();
   async function generateAuthorizationUrl() {
-    const discoveryDoc = await fetchJson(OPENID_DISCOVERY_URL);
+    const discoveryDoc = await fetchJson(process.env.OPENID_DISCOVERY_URL);
     const parameters = {
       response_type: "token",
-      client_id: CLIENT_ID,
+      client_id: process.env.CLIENT_ID,
       redirect_uri: window.location.origin + "/login/callback",
       scope: "profile email",
     };

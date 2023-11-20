@@ -1,8 +1,8 @@
-import React, {useContext, useState} from "react";
-import {LoginContext} from "../login/loginContext";
+import React, { useContext, useState } from "react";
+import { LoginContext } from "../login/loginContext";
 export function AddMovieForm() {
   const [title, setTitle] = useState("");
-  const {user} = useContext(LoginContext);
+  const { user } = useContext(LoginContext);
 
   // sender en post request til serveren
   async function handleSubmit(e) {
@@ -13,7 +13,7 @@ export function AddMovieForm() {
       headers: {
         "Content-Type": "application/json",
       },
-        async reload(){},
+      async reload() {},
     });
   }
   return (

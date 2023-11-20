@@ -4,3 +4,4 @@
 /node_modules/
 /client/.parcel-cache/
 /client/dist/
+.env

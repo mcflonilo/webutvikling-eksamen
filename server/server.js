@@ -6,7 +6,7 @@ import fetch from "node-fetch";
 import { loginRouter } from "./loginRouter.js";
 import { moviesRouter } from "./moviesRouter.js";
 let backendUser = null;
-dotenv.config({path: "../.env"});
+dotenv.config({ path: "../.env" });
 async function fetchJson(url, params) {
   const res = await fetch(url, params);
   if (!res.ok) {

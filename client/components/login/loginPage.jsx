@@ -12,10 +12,13 @@ async function fetchJson(url) {
 function LoginWithOauthButton() {
   const [authorizationUrl, setAuthorizationUrl] = useState();
   async function generateAuthorizationUrl() {
-    const discoveryDoc = await fetchJson("https://accounts.google.com/.well-known/openid-configuration");
+    const discoveryDoc = await fetchJson(
+      "https://accounts.google.com/.well-known/openid-configuration",
+    );
     const parameters = {
       response_type: "token",
-      client_id:"893890510835-3aeshgp5bpa6dk1hc85ousdnv283rblp.apps.googleusercontent.com" ,
+      client_id:
+        "893890510835-3aeshgp5bpa6dk1hc85ousdnv283rblp.apps.googleusercontent.com",
       redirect_uri: window.location.origin + "/login/callback",
       scope: "profile email",
     };

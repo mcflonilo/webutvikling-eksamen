@@ -13,6 +13,7 @@ loginRouter.get("", async (req, res) => {
 // kalles når bruker logger inn med brukernavn og passord
 loginRouter.post("", (req, res) => {
   const { username, password } = req.body;
+  console.log("username signed");
   res.cookie("username", username, { signed: true });
   res.sendStatus(204);
 });

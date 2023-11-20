@@ -10,6 +10,7 @@ dotenv.config({path: "../.env"});
 async function fetchJson(url, params) {
   const res = await fetch(url, params);
   if (!res.ok) {
+    console.log(res);
     throw new Error("Can't fetch " + url);
   }
   return await res.json();

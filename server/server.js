@@ -6,7 +6,7 @@ import fetch from "node-fetch";
 import { loginRouter } from "./loginRouter.js";
 import { moviesRouter } from "./moviesRouter.js";
 let backendUser = null;
-dotenv.config();
+dotenv.config({path: "../.env"});
 async function fetchJson(url, params) {
   const res = await fetch(url, params);
   if (!res.ok) {
@@ -15,15 +15,17 @@ async function fetchJson(url, params) {
   return await res.json();
 }
 
+const cookieParserSecret = process.env.COOKIE_PARSER_SECRET;
+const openID_url = process.env.OPENID_DISCOVERY_URL;
 const app = express();
 app.use(express.static("../client/dist"));
 app.use(express.json());
-app.use(cookieParser(process.env.COOKIE_PARSER_SECRET));
+app.use(cookieParser(cookieParserSecret));
 app.use(moviesRouter);
 app.use(async (req, res, next) => {
   const { username, access_token } = req.signedCookies;
   if (access_token) {
-    const discoveryDocument = await fetchJson(process.env.OPENID_DISCOVERY_URL);
+    const discoveryDocument = await fetchJson(openID_url);
     const { userinfo_endpoint } = discoveryDocument;
     const user = await fetchJson(userinfo_endpoint, {
       headers: {

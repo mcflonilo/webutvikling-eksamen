@@ -5,6 +5,10 @@ import * as path from "path";
 import fetch from "node-fetch";
 import { loginRouter } from "./loginRouter.js";
 import { moviesRouter } from "./moviesRouter.js";
+import { WebSocketServer } from "ws";
+
+
+
 let backendUser = null;
 dotenv.config({ path: "../.env" });
 async function fetchJson(url, params) {
@@ -39,9 +43,12 @@ app.use(async (req, res, next) => {
     const username = `${given_name} ${family_name}`;
     req.user = { ...user, username };
   } else if (username) {
-    req.user = { username: username, email_verified: false };
+    req.user = { username: username, email_verified: false , picture: "/img/otlqo1ek.png"};
   }
   next();
+});
+app.get("/img/otlqo1ek.png", (req, res) => {
+    res.sendFile("img/otlqo1ek.png", { root: ".." });
 });
 
 app.use("/api/login", loginRouter);
@@ -53,4 +60,23 @@ app.use((req, res, next) => {
     next();
   }
 });
-app.listen(process.env.PORT || 3000);
+const server = app.listen(process.env.PORT || 3000);
+const sockets = [];
+const wsServer = new WebSocketServer({ noServer: true });
+server.on("upgrade", (req,socket,head) => {
+  wsServer.handleUpgrade(req, socket, head, socket => {
+    console.log("adding socket");
+    sockets.push(socket);
+    socket.on("message", (message) => {
+      const {chatMessage, user} = JSON.parse(message);
+      for (let i = 0; i < sockets.length; i++)
+      {
+        sockets[i].send(JSON.stringify({chatMessage, user}));
+        console.log("pushing to socket: "+ i  + message);
+
+      }
+      });
+
+    });
+    });
+

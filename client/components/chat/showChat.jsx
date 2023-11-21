@@ -1,17 +1,36 @@
-import React, { useState, useEffect } from "react";
-import {SendChatForm} from "./sendChatForm";
+import React, {useState, useEffect, useContext} from "react";
 import { LoginContext } from "../login/loginContext";
 
 export function ShowChat() {
+    const [message, setMessage] = useState("");
+    const { user } = useContext(LoginContext);
     const { us, username } = React.useContext(LoginContext);
   const [chat, setChat] = useState([]);
   const [loading, setLoading] = useState(true);
+    const socket = new WebSocket(window.location.origin.replace(/^http/, "ws"))
+    socket.onmessage = (message) => {
+        console.log("from server", message);
+        const data = JSON.parse(message.data);
+        setChat((oldChat) => [...oldChat, data]);
+
+    };
   async function loadChat() {
     const response = await fetch("/api/chat");
     setLoading(true);
     setChat(await response.json());
     setLoading(false);
   }
+  async function handleSubmit(e) {
+        socket.send(JSON.stringify({ chatMessage: message, user}));
+        e.preventDefault();
+        await fetch("/api/sendChat", {
+            method: "POST",
+            body: JSON.stringify({ chatMessage: message, user}),
+            headers: {
+                "Content-Type": "application/json",
+            }}
+        );
+    }
 
   useEffect(() => {
     loadChat();
@@ -26,14 +45,16 @@ export function ShowChat() {
 
         <div id={"chatMessage"} key={m._id}><img id={"chatImg"} src={m.user?.picture}/>{m.chatMessage} sendt by {m.user.username}</div>
       ))}
-      <SendChatForm></SendChatForm>
+        <form onSubmit={handleSubmit} id={"chat"}>
+            <div>
+                <input value={message} onChange={(e) => setMessage(e.target.value)} />
+            </div>
+            <div>
+                <button>submit</button>
+            </div>
+        </form>
     </>
   );
 
-  } else {
-    return (
-        <>
-            <h2>log in to see chat</h2>
-          </>);
-  }
+  } else {return (<><h2>log in to see chat</h2></>);}
 }

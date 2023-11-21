@@ -14,7 +14,6 @@ loginRouter.get("", async (req, res) => {
 loginRouter.post("", (req, res) => {
   const { username, password } = req.body;
   console.log("username signed");
-
   res.cookie("username", username, { signed: true });
   res.sendStatus(204);
 });

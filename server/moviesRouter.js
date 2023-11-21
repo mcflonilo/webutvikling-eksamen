@@ -1,4 +1,6 @@
 import express from "express";
+import {WebSocketServer} from "ws";
+import app from "express/lib/application.js";
 const MOVIES = [];
 
 export const moviesRouter = express.Router();

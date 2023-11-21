@@ -4,23 +4,18 @@ import dotenv from "dotenv";
 import * as path from "path";
 import fetch from "node-fetch";
 import { loginRouter } from "./loginRouter.js";
-import { moviesRouter, messages } from "./moviesRouter.js";
+import {moviesRouter} from "./moviesRouter.js";
 import { WebSocketServer } from "ws";
 
-let backendUser = null;
 dotenv.config({ path: "../.env" });
-async function fetchJson(url, params) {
-  const res = await fetch(url, params);
-  if (!res.ok) {
-    console.log(res);
-    throw new Error("Can't fetch " + url);
-  }
-  return await res.json();
-}
 
 const cookieParserSecret = process.env.COOKIE_PARSER_SECRET;
 const openID_url = process.env.OPENID_DISCOVERY_URL;
 const app = express();
+const server = app.listen(process.env.PORT || 3000);
+const sockets = [];
+const wsServer = new WebSocketServer({ noServer: true });
+
 app.use(express.static("../client/dist"));
 app.use(express.json());
 app.use(cookieParser(cookieParserSecret));
@@ -52,7 +47,6 @@ app.use(async (req, res, next) => {
 app.get("/img/otlqo1ek.png", (req, res) => {
   res.sendFile("img/otlqo1ek.png", { root: ".." });
 });
-
 app.use("/api/login", loginRouter);
 app.use(express.static("../client/dist"));
 app.use((req, res, next) => {
@@ -62,19 +56,24 @@ app.use((req, res, next) => {
     next();
   }
 });
-const server = app.listen(process.env.PORT || 3000);
-const sockets = [];
-const wsServer = new WebSocketServer({ noServer: true });
 server.on("upgrade", (req, socket, head) => {
   wsServer.handleUpgrade(req, socket, head, (socket) => {
-    console.log("adding socket");
     sockets.push(socket);
     socket.on("message", (message) => {
       const { chatMessage, user } = JSON.parse(message);
       for (let i = 0; i < sockets.length; i++) {
         sockets[i].send(JSON.stringify({ chatMessage, user }));
-        console.log("pushing to socket: " + i + message);
       }
     });
   });
 });
+
+
+async function fetchJson(url, params) {
+  const res = await fetch(url, params);
+  if (!res.ok) {
+    console.log(res);
+    throw new Error("Can't fetch " + url);
+  }
+  return await res.json();
+}

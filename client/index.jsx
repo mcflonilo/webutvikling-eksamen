@@ -4,6 +4,7 @@ import { BrowserRouter, Link } from "react-router-dom";
 import { AppRoutes } from "./components/chat/AppRoutes";
 import { LoginButton } from "./components/login/loginButton";
 import { LoginContext } from "./components/login/loginContext";
+import { MakeNewChatRoomButton } from "./components/chat/makeNewChatRoomButton";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 import "./application.css";
@@ -40,6 +41,7 @@ function Application() {
         <Link to={"/"}> Front Page</Link>
         <Link to={"/chat"}> chat </Link>
         <LoginButton />
+        <MakeNewChatRoomButton />
       </nav>
       <main>
         <AppRoutes />

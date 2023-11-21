@@ -7,6 +7,12 @@ import { LoginContext } from "./components/login/loginContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 import "./application.css";
+export const socket = new WebSocket(
+  window.location.origin.replace(/^http/, "ws"),
+);
+socket.onopen = () => {
+  console.log("connected");
+};
 
 function Application() {
   const [user, setUser] = useState();

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Link } from "react-router-dom";
-import { AppRoutes } from "./components/movies/AppRoutes";
+import { AppRoutes } from "./components/chat/AppRoutes";
 import { LoginButton } from "./components/login/loginButton";
 import { LoginContext } from "./components/login/loginContext";
 
@@ -10,7 +10,6 @@ import "./application.css";
 
 function Application() {
   const [user, setUser] = useState();
-
   async function fetchUser() {
     const res = await fetch("/api/login");
     if (res.status === 401) {
@@ -33,14 +32,12 @@ function Application() {
       </header>
       <nav>
         <Link to={"/"}> Front Page</Link>
-        <Link to={"/movies/new"}> add movie</Link>
-        <Link to={"/movies"}> list movies</Link>
+        <Link to={"/chat"}> chat </Link>
         <LoginButton />
       </nav>
       <main>
         <AppRoutes />
       </main>
-      <footer>jeg har cancer</footer>
     </LoginContext.Provider>
   );
 }

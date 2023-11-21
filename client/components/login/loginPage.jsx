@@ -18,7 +18,7 @@ function LoginWithOauthButton() {
     const parameters = {
       response_type: "token",
       client_id:
-        "893890510835-3aeshgp5bpa6dk1hc85ousdnv283rblp.apps.googleusercontent.com",
+        "893890510835-p02i0qart03at89i7ev8eqf05k0fu9sr.apps.googleusercontent.com",
       redirect_uri: window.location.origin + "/login/callback",
       scope: "profile email",
     };

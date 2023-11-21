@@ -1,11 +1,11 @@
 import renderer, { act } from "react-test-renderer";
-import { MoviesList } from "../moviesList";
+import { ShowChat } from "../showChat";
 import { MoviesContext } from "../moviesContext";
-import { AddMovieForm } from "../addMovieForm";
+import { SendChatForm } from "../sendChatForm";
 
 describe("movies react application", () => {
   it("show loading screen", () => {
-    const component = renderer.create(<MoviesList />);
+    const component = renderer.create(<ShowChat />);
     expect(component).toMatchSnapshot();
   });
 
@@ -19,7 +19,7 @@ describe("movies react application", () => {
     await act(async () => {
       component = renderer.create(
         <MoviesContext.Provider value={{ fetchMovies }}>
-          <MoviesList />
+          <ShowChat />
         </MoviesContext.Provider>,
       );
     });
@@ -29,7 +29,7 @@ describe("movies react application", () => {
     const onAddMovie = jest.fn();
     const component = renderer.create(
       <MoviesContext.Provider value={{ onAddMovie }}>
-        <AddMovieForm />
+        <SendChatForm />
       </MoviesContext.Provider>,
     );
 

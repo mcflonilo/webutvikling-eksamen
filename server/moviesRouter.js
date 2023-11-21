@@ -2,8 +2,8 @@ import express from "express";
 const MOVIES = [];
 
 export const moviesRouter = express.Router();
-moviesRouter.get("/api/movies", (req, res) => {
-  const emptyTable = { title: "no movies", id: -1 };
+moviesRouter.get("/api/chat", (req, res) => {
+  const emptyTable = { chatMessage: "send a message to start a chat :)", id: -1, user: "empty user" };
   if (MOVIES.length === 0) {
     MOVIES.push(emptyTable);
   } else if (MOVIES[0].id === -1 && MOVIES.length > 1) {
@@ -11,8 +11,8 @@ moviesRouter.get("/api/movies", (req, res) => {
   }
   res.json(MOVIES);
 });
-moviesRouter.post("/api/movies", (req, res) => {
-  const { title } = req.body;
-  MOVIES.push({ title, id: MOVIES.length });
+moviesRouter.post("/api/sendChat", (req, res) => {
+  const { chatMessage , user} = req.body;
+  MOVIES.push({ chatMessage, user, id: MOVIES.length });
   res.sendStatus(204);
 });

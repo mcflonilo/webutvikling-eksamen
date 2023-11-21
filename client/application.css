@@ -34,6 +34,16 @@ main {
     color: aliceblue;
   }
 }
+#chatMessage {
+  width: 100vw;
+  height: 5vh;
+  vertical-align: center;
+}
+#chatImg {
+  height: 100%;
+  width: auto;
+  border-radius: 50%;
+}
 
 #root {
   height: 100vh;

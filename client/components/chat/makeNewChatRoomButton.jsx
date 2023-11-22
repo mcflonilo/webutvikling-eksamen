@@ -6,7 +6,7 @@ export function MakeNewChatRoomButton() {
   const { user } = useContext(LoginContext);
   if (user != null) {
     if (user.email_verified === true) {
-      return <Link to={"/chatroom/create"}>make new chatroom!</Link>;
+      return <Link to={"/chatroom/create"}>Make new chatroom!</Link>;
     }
   }
 

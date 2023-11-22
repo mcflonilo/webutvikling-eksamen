@@ -4,15 +4,16 @@ import { ShowChat } from "./showChat";
 import { LoginPage } from "../login/loginPage";
 import { ProfilePage } from "../login/profilePage";
 import { LoginCallback } from "../login/loginCallback";
-import {ChatRoomSelection} from "./chatRoomSelection";
 import {MakeNewChatRoom} from "./makeNewChatRoom";
 import {EditChatRoom} from "./editChatRoom";
+import {FrontPage} from "./frontPage";
+
+
 
 export function AppRoutes() {
   return (
     <Routes>
-      <Route path={"/"} element={<h2>front page</h2>} />
-      <Route path={"/chat"} element={<ChatRoomSelection />} />
+      <Route path={"/"} element={<FrontPage/>} />
       <Route path={"/login"} element={<LoginPage />} />
       <Route path={"/profile"} element={<ProfilePage />} />
       <Route path={"/login/callback"} element={<LoginCallback />} />

@@ -10,7 +10,7 @@ export function ProfilePage() {
     e.preventDefault();
     await fetch("/api/login", { method: "DELETE" });
     await reload();
-    navigate("/");
+      navigate("/chatroom?roomName=startChat")
   }
 
   if (user.email_verified === false) {
@@ -26,7 +26,7 @@ export function ProfilePage() {
     );
   }
   return (
-    <>
+    <div id={"profile"}>
       <h2>User profile</h2>
       <form onSubmit={handleLogOut}>
         <button>Log out</button>
@@ -34,8 +34,6 @@ export function ProfilePage() {
       <img src={user?.picture} />
       <div>{user.name}</div>
       <div>{user.email}</div>
-
-      <pre>{JSON.stringify(user, null, 2)}</pre>
-    </>
+    </div>
   );
 }

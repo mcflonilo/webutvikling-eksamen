@@ -52,27 +52,20 @@ export function LoginPage() {
       },
     });
     await reload();
-    navigate("/");
+    navigate("/chatroom?roomName=startChat");
   }
 
   return (
     <form onSubmit={handleSubmit}>
-      <LoginWithOauthButton />
       <h2>Login page</h2>
+      <LoginWithOauthButton />
+      <h3>or just type in username to chat</h3>
       <div>
         Username <br />
         <input
           autoFocus={true}
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-        />
-      </div>
-      <div>
-        Password <br />
-        <input
-          type={"password"}
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
         />
       </div>
       <div>

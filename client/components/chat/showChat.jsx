@@ -3,6 +3,7 @@ import { LoginContext } from "../login/loginContext";
 import { socket } from "../../index";
 import {ChatRoomSelection} from "./chatRoomSelection";
 import {EditChatRoomButton} from "./editChatRoomButton";
+import {LoginButton} from "../login/loginButton";
 
 export function ShowChat() {
   const { user, username } = useContext(LoginContext);
@@ -11,11 +12,12 @@ export function ShowChat() {
   const [room, setRoom] = useState("");
   const [chat, setChat] = useState([]);
   const [loading, setLoading] = useState(true);
-
+    const nestedElement = document.getElementById("actualChat");
   socket.onmessage = (message) => {
     console.log("from server", message);
     const data = JSON.parse(message.data);
     setChat((oldChat) => [...oldChat, data]);
+    nestedElement.scrollTo(0, nestedElement.scrollHeight);
   };
   async function loadChat() {
     const chat = await fetch("/api/chat?roomName="+roomName);
@@ -44,40 +46,44 @@ export function ShowChat() {
 
   if (user || username) {
     return (
-      <div id={"chatDivs"}>
-        <div id={"chatrooms"}>
-          <ChatRoomSelection></ChatRoomSelection>
-        </div>
-        <div>
+      <div className={"chat"} id={"chatDivs"}>
+        <div id={"chatRoomHeaders"}>
           <h2>{room.roomName} <EditChatRoomButton room={room}/></h2>
           <p>{room.description}</p>
+        </div>
+        <div id={"chatAndRooms"}>
+          <ChatRoomSelection></ChatRoomSelection>
+        <div id={"chatAndInput"}>
+        <div id={"actualChat"}>
           {loading && <div>loading chat!</div>}
           {chat.map((m) => (
-              <div id={"chatMessage"} key={m._id}>
+              <div id={"chatMessageDiv"} key={m._id}>
                 <img id={"chatImg"} src={m.user?.picture} />
-                {m.chatMessage} sendt by {m.user.username}
-              </div>
+                <div id={"messageText"}>
+                  <p id={"chatMessage"}>{m.chatMessage}</p>
+                  <footer id={"userName"}>{m.user.username}</footer>
+                </div>
+                </div>
           ))}
-          <form onSubmit={handleSubmit} id={"chat"}>
-            <div>
-              <input
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
-              />
-            </div>
-            <div>
-              <button>submit</button>
-            </div>
+          <form onSubmit={handleSubmit} id={"chatInput"}>
+            <input id={"chatInputField"}
+                   value={message}
+                   onChange={(e) => setMessage(e.target.value)}
+            />
           </form>
         </div>
+
+        </div>
+          </div>
 
       </div>
     );
   } else {
     return (
-      <>
-        <h2>log in to see chat</h2>
-      </>
+      <div>
+        <h2>Log in to see chat</h2>
+        <LoginButton/>
+      </div>
     );
   }
 }

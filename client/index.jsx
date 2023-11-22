@@ -35,15 +35,14 @@ function Application() {
       value={{ username: user?.username, user, reload: fetchUser }}
     >
       <header>
-        <h1> User Database</h1>
+        <h1>EPISK CHATTE APP </h1>
       </header>
       <nav>
-        <Link to={"/"}> Front Page</Link>
-        <Link to={"/chat"}> chat </Link>
+        <Link to={"/chatroom?roomName=startChat"}> Chat </Link>
         <LoginButton />
         <MakeNewChatRoomButton />
       </nav>
-      <main>
+      <main id={"main"}>
         <AppRoutes />
       </main>
     </LoginContext.Provider>

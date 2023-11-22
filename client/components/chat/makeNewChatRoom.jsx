@@ -1,8 +1,10 @@
 import React, {useContext, useState} from "react";
 import {LoginContext} from "../login/loginContext";
+import {useNavigate} from "react-router-dom";
 
 export function MakeNewChatRoom() {
     const [roomName, setRoomName] = useState("");
+    const navigate = useNavigate();
     const [description, setDescription] = useState("");
     const { user } = useContext(LoginContext);
     async function handleSubmit(e) {
@@ -20,6 +22,7 @@ export function MakeNewChatRoom() {
                 "Content-Type": "application/json",
             },
         });
+            navigate("/chatroom?roomName="+roomName);
         }
         else {
             alert("room already exists");
@@ -27,7 +30,7 @@ export function MakeNewChatRoom() {
     }
 
     return (
-        <>
+        <div>
             <h2>create new room !!</h2>
             <form onSubmit={handleSubmit}>
                 <div>
@@ -51,6 +54,6 @@ export function MakeNewChatRoom() {
                     <button>submit</button>
                 </div>
             </form>
-        </>
+        </div>
     );
 }

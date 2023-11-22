@@ -1,7 +1,9 @@
 import React, {useContext, useState} from "react";
+import {useNavigate} from "react-router-dom";
 
 export function EditChatRoom() {
   const oldName = new URLSearchParams(window.location.search).get("roomName");
+  const navigate = useNavigate();
   const [roomName, setRoomName] = useState("");
   const [description, setDescription] = useState("");
   async function handleSubmit(e) {
@@ -22,6 +24,9 @@ export function EditChatRoom() {
           "Content-Type": "application/json",
         },
       });
+      setDescription("");
+        setRoomName("");
+      navigate("/chatroom?roomName="+roomName);
   }
     else {
       alert("room name taken");}
@@ -29,7 +34,7 @@ export function EditChatRoom() {
 
 
   return (
-      <>
+      <div>
         <h2>edit chatroom</h2>
         <form onSubmit={handleSubmit}>
           <div>
@@ -53,9 +58,6 @@ export function EditChatRoom() {
             <button>submit</button>
           </div>
         </form>
-        <pre>{JSON.stringify(description, )}</pre>
-        <pre>{JSON.stringify(oldName, )}</pre>
-        <pre>{JSON.stringify(roomName, )}</pre>
-      </>
+      </div>
   );
 }

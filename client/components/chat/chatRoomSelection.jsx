@@ -10,11 +10,11 @@ export function ChatRoomSelection() {
         loadChatRooms();
     }, []);
   return (
-      <>
+      <div id={"chatrooms"}>
         <h2>select chatroom</h2>
         {chatRooms.map((m) => (
             <div key={m._id}><a href={window.location.origin+"/chatroom?roomName="+m.roomName}>{m.roomName}</a></div>
         ))}
-      </>
+      </div>
   );
 }

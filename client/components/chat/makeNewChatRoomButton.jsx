@@ -8,7 +8,5 @@ export function MakeNewChatRoomButton() {
     if (user.email_verified === true) {
       return <Link to={"/chatroom/create"}>Make new chatroom!</Link>;
     }
-  }
-
-  return <></>;
+  } else return <></>;
 }

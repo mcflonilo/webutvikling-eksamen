@@ -4,8 +4,9 @@ import dotenv from "dotenv";
 import * as path from "path";
 import fetch from "node-fetch";
 import { loginRouter } from "./loginRouter.js";
-import {moviesRouter} from "./moviesRouter.js";
+import { chatApi } from "./chatApi.js";
 import { WebSocketServer } from "ws";
+import {MongoClient} from "mongodb";
 
 dotenv.config({ path: "../.env" });
 
@@ -16,10 +17,15 @@ const server = app.listen(process.env.PORT || 3000);
 const sockets = [];
 const wsServer = new WebSocketServer({ noServer: true });
 
+const url = process.env.MONGODB_URL;
+const client = new MongoClient(url);
+client.connect().then(async () => {
+  app.use(chatApi(client.db("chat")));
+  console.log("Connected to database");
+});
 app.use(express.static("../client/dist"));
 app.use(express.json());
 app.use(cookieParser(cookieParserSecret));
-app.use(moviesRouter);
 app.use(async (req, res, next) => {
   const { username, access_token } = req.signedCookies;
   if (access_token) {
@@ -67,7 +73,6 @@ server.on("upgrade", (req, socket, head) => {
     });
   });
 });
-
 
 async function fetchJson(url, params) {
   const res = await fetch(url, params);

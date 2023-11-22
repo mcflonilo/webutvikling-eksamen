@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 export function ChatRoomSelection() {
   const [chatRooms, setChatRooms] = useState([]);
@@ -6,15 +6,20 @@ export function ChatRoomSelection() {
     const response = await fetch("/api/getrooms");
     setChatRooms(await response.json());
   }
-    useEffect(() => {
-        loadChatRooms();
-    }, []);
+  useEffect(() => {
+    loadChatRooms();
+  }, []);
+
   return (
-      <div id={"chatrooms"}>
-        <h2>select chatroom</h2>
-        {chatRooms.map((m) => (
-            <div key={m._id}><a href={window.location.origin+"/chatroom?roomName="+m.roomName}>{m.roomName}</a></div>
-        ))}
-      </div>
+    <div id={"chatrooms"}>
+      <h2>select chatroom</h2>
+      {chatRooms.map((m) => (
+        <div key={m._id}>
+          <a href={window.location.origin + "/chatroom?roomName=" + m.roomName}>
+            {m.roomName}
+          </a>
+        </div>
+      ))}
+    </div>
   );
 }

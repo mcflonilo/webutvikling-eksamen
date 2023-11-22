@@ -10,7 +10,7 @@ export function ProfilePage() {
     e.preventDefault();
     await fetch("/api/login", { method: "DELETE" });
     await reload();
-      navigate("/chatroom?roomName=startChat")
+    navigate("/chatroom?roomName=startChat");
   }
 
   if (user.email_verified === false) {

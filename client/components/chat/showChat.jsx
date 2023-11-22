@@ -13,10 +13,8 @@ export function ShowChat() {
   const [chat, setChat] = useState([]);
   const [loading, setLoading] = useState(true);
     const nestedElement = document.getElementById("actualChat");
-  socket.onmessage = (message) => {
-    console.log("from server", message);
-    const data = JSON.parse(message.data);
-    setChat((oldChat) => [...oldChat, data]);
+  socket.onmessage = () => {
+    loadChat();
     nestedElement.scrollTo(0, nestedElement.scrollHeight);
   };
   async function loadChat() {

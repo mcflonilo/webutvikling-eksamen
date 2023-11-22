@@ -6,7 +6,7 @@ import fetch from "node-fetch";
 import { loginRouter } from "./loginRouter.js";
 import { chatApi } from "./chatApi.js";
 import { WebSocketServer } from "ws";
-import {MongoClient} from "mongodb";
+import { MongoClient } from "mongodb";
 
 dotenv.config({ path: "../.env" });
 

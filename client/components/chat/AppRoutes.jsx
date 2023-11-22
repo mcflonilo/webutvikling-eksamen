@@ -6,6 +6,7 @@ import { ProfilePage } from "../login/profilePage";
 import { LoginCallback } from "../login/loginCallback";
 import {ChatRoomSelection} from "./chatRoomSelection";
 import {MakeNewChatRoom} from "./makeNewChatRoom";
+import {EditChatRoom} from "./editChatRoom";
 
 export function AppRoutes() {
   return (
@@ -17,6 +18,7 @@ export function AppRoutes() {
       <Route path={"/login/callback"} element={<LoginCallback />} />
         <Route path={"/chatroom/*"} element={<ShowChat />} />
         <Route path={"/chatroom/create"} element={<MakeNewChatRoom />} />
+        <Route path={"/chatroom/edit/*"} element={<EditChatRoom />} />
     </Routes>
   );
 }

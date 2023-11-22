@@ -4,8 +4,11 @@ import { LoginContext } from "../login/loginContext";
 
 export function MakeNewChatRoomButton() {
   const { user } = useContext(LoginContext);
-  if (user) {
-    return <Link to={"/chatroom/create"}>make new chatroom!</Link>;
+  if (user != null) {
+    if (user.email_verified === true) {
+      return <Link to={"/chatroom/create"}>make new chatroom!</Link>;
+    }
   }
+
   return <></>;
 }

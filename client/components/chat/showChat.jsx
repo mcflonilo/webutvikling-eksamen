@@ -2,14 +2,15 @@ import React, { useState, useEffect, useContext } from "react";
 import { LoginContext } from "../login/loginContext";
 import { socket } from "../../index";
 import {ChatRoomSelection} from "./chatRoomSelection";
+import {EditChatRoomButton} from "./editChatRoomButton";
 
 export function ShowChat() {
+  const { user, username } = useContext(LoginContext);
   const roomName = new URLSearchParams(window.location.search).get("roomName");
   const [message, setMessage] = useState("");
-  const { user, username } = useContext(LoginContext);
+  const [room, setRoom] = useState("");
   const [chat, setChat] = useState([]);
   const [loading, setLoading] = useState(true);
-
 
   socket.onmessage = (message) => {
     console.log("from server", message);
@@ -17,9 +18,11 @@ export function ShowChat() {
     setChat((oldChat) => [...oldChat, data]);
   };
   async function loadChat() {
-    const response = await fetch("/api/chat?roomName="+roomName);
+    const chat = await fetch("/api/chat?roomName="+roomName);
+    const room = await fetch("/api/getroom?roomName="+roomName);
     setLoading(true);
-    setChat(await response.json());
+    setChat(await chat.json());
+    setRoom(await room.json());
     setLoading(false);
   }
   async function handleSubmit(e) {
@@ -46,8 +49,8 @@ export function ShowChat() {
           <ChatRoomSelection></ChatRoomSelection>
         </div>
         <div>
-          <h2>Epic chat function!!</h2>
-          <h2>{roomName}</h2>
+          <h2>{room.roomName} <EditChatRoomButton room={room}/></h2>
+          <p>{room.description}</p>
           {loading && <div>loading chat!</div>}
           {chat.map((m) => (
               <div id={"chatMessage"} key={m._id}>

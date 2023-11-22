@@ -12,6 +12,7 @@ client.connect().then((connection) => {
 });
 
 export const moviesRouter = express.Router();
+//henter alle meldinger fra ett rom fra databasen
 moviesRouter.get("/api/chat", async (req, res) => {
     const { roomName } = req.query;
   messages = await db
@@ -22,6 +23,7 @@ moviesRouter.get("/api/chat", async (req, res) => {
     res.json(messages);
   });
 
+//legger til en melding til databasen
   moviesRouter.post("/api/chat", async (req, res) => {
     const { chatMessage , user, roomName} = req.body;
     await db
@@ -30,16 +32,55 @@ moviesRouter.get("/api/chat", async (req, res) => {
     res.sendStatus(204);
   });
 
+  //legger til et rom til databasen
 moviesRouter.post("/api/createroom", async (req, res) => {
-  const { roomName , description} = req.body;
+  const { roomName , description, user} = req.body;
   await db
       .collection("chatRooms")
-      .insertOne({ roomName, description});
+      .insertOne({ roomName, description, user});
   res.sendStatus(204);
 });
+//henter alle rom fra databasen
 moviesRouter.get("/api/getrooms", async (req, res) => {
   const rooms = await db.collection("chatRooms")
       .find()
       .toArray();
   res.json(rooms);
+});
+
+//finner ett rom fra databasen
+moviesRouter.get("/api/getroom", async (req, res) => {
+  const { roomName } = req.query;
+  const room = await db
+      .collection("chatRooms")
+      .findOne({roomName:roomName})
+  console.log(room);
+  if (room === null) {
+    res.sendStatus(404);
+    return;
+  }
+  res.json(room);
+});
+//finner ett rom fra databasen
+moviesRouter.put("/api/getroom", async (req, res) => {
+  const { roomName, oldName, description } = req.body;
+  console.log("roomName = "+roomName);
+    console.log("oldName = "+oldName);
+        console.log("description = "+description);
+
+  const newRoom = await db
+      .collection("chatRooms")
+      .updateOne(
+          {roomName:oldName},
+          {$set:{roomName:roomName, description:description}}
+      )
+  const messages = await db
+        .collection("messages")
+          .updateMany(
+                {roomName:oldName},
+                {$set:{roomName:roomName}}
+          )
+  console.log(newRoom);
+  console.log(messages);
+  res.sendStatus(204);
 });

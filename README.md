@@ -1,21 +1,9 @@
-# pg6301-valgfri-innlevering-template
+heroku link : https://eksamen-webutvikling-83b210ce7528.herokuapp.com/
+github link : https://github.com/mcflonilo/webutvikling-eksamen/edit/main/README.md
 
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/9O-uluRb)
+jeg valgte å ikke legge til entra id siden jeg ikke hadde gjort det før og følte det var ganske lignende som å legge til google så valgte å bruke tiden min på andre ting i stedet.
+Jeg tolket også at anonyme brukere var brukere som ikke hadde logget seg inn enda, så jeg gjorde det bare sånn at du ikke var logget inn kunne du ikke se noe som helst
+jeg slet litt med å få websockets til å hente meldinger så jeg brukte de heller til å hente hele chathistorien på nytt fra mongodb
+tester slet jeg veldig med, men klarte såvidt å få lagt til noen tester på react siden og en på serveren. tror jeg løste koden litt på slutten men gikk tom for tid. ellers hadde jeg nok klart å få opp code coverage ganske mye.
 
-VIKTIG: ANGI LINK TIL HEROKU REPOSITORY
-
-I innleveringen skal dere lage et program med React og Express som lar brukeren opprette nye tasks og liste eksisterende tasks. (Det er lov å tilpasse oppgaven til noe du selv har laget)
-
-(Kryss av det dere har gjennomført. Erstatt eventuelt ordet "tasks")
-
-- [ ] Applikasjonen har en korrekt `.gitignore`-fil og det finnes ingen passord eller store filer i Git-historikken
-- [ ] Applikasjonen har en React komponent som lister tasks
-- [ ] Applikasjonen har en React komponent som lar brukeren opprette nye tasks
-- [ ] Applikasjonen er deployet på Heroku og README-filen har link til Heroku applikasjonen
-- [ ] Applikasjonen har et API i Express for å opprette og liste tasks (ikke påkrevd)
-- [ ] Applikasjonen er satt opp til å bruke Prettier for å formatere kode (ikke påkrevd)
-- [ ] Applikasjonen har tester for frontend kode i React (valgfritt)
-- [ ] Applikasjonen har tester for backend kode i Express (valgfritt)
-- [ ] Applikasjonen bruker TypeScript for frontend-kode (valgfritt)
-- [ ] Applikasjonen bruker TypeScript for backend-kode (valgfritt)
-- [ ] Applikasjonen lagrer tasks i MongoDB (valgfritt)
+rakk heller ikke så mye error handling siden jeg valgte å fokusere på de funksjonelle kravene
